@@ -1,0 +1,34 @@
+## 手写事件委托
+
+## 初级事件委托
+
+```js
+ul.addEventListener('click', function (e) {
+    if (e.target.tagName.toLowerCase() === 'li') {
+        fn() // 执行某个函数
+    }
+})
+```
+
+## 高级事件委托
+
+有这样一个场景，ul里面有li，li里面有span。此时我点击span，上面的代码是不是执行li的事件的。
+
+这个代码的思想就是循环往上找是不是还有父选择器
+
+```js
+function delegate(element, eventType, selector, fn) {
+    element.addEventListener(eventType, e => {
+        let el = e.target
+        while (!el.matches(selector)) {
+            if (element === el) {
+                el = null
+                break
+            }
+            el = el.parentNode
+        }
+        el && fn.call(el, e, el)
+    })
+    return element
+}
+```
