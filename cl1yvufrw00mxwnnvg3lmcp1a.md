@@ -1,0 +1,134 @@
+## 彻底搞定JS的this
+
+## arguments 和 this
+
+每个函数都有 arguments 和 this，除了箭头函数
+
+### arguments
+
+```js
+function fn() {
+    console.log(arguments);
+}
+
+fn(1, 'b')
+```
+
+输出结果：
+![image](https://cdn.hashnode.com/res/hashnode/image/upload/v1649933549404/7PB7PP1Cc.png)
+arguments 是一个关键字。打印出 arguments 会发现他是一个包含所有参数的伪数组。
+
+怎么知道呢？看原型没有数组的原型属性！！！
+![image](https://cdn.hashnode.com/res/hashnode/image/upload/v1649933551434/AT3vEtuqc.png)
+
+### this
+
+```js
+function fn() {
+    console.log(this);
+}
+
+fn()
+```
+
+![image](https://cdn.hashnode.com/res/hashnode/image/upload/v1649933553875/2wyKY3FZp.png)
+得出结论：如果不给任何条件，this 默认指向 window
+
+### 如何指定this
+
+目前可以使用 fn.call(xxx,1,2,3)传 this 和 arguments
+
+**如果使用 call 传的 this 不是对象，JS 会尽量帮你封装成对象。**
+
+比如你使用 fn.call(1),打印出的 Number{1}
+
+如果我就想输出1呢？
+
+那就这样写：
+
+```js
+function fn() {
+    'use strict'
+    console.log(this)
+}
+```
+
+这次就打印出了1。但是没人会这么写。
+
+这就是 JS 的奇葩之处。
+
+需要注意的是 call，this是第一个参数，arguments 是后面的参数。
+
+得到一个自己的结论：this 是隐藏的参数 arguments 是普通参数
+
+```js
+let person = {
+    name: 'bot',
+    sayHi() {
+        console.log('你好，我叫' + person.name)
+    }
+}
+```
+
+上面的代码是打印出你好我叫bot，不使用 this 使用 person。是合法的。
+
+但是问题是如果person改名了，那打印日志的person也要改名
+
+这个函数甚至有可能出现在另一个文件里
+
+我们不想让函数里面出现 person 的引用
+
+那么怎样才能获取对象的 name 属性呢？
+
+土办法，使用参数传进去：
+
+```js
+let person = {
+    name: 'bot',
+    sayHi(p) {
+        console.log('你好，我叫' + p.name)
+    }
+}
+
+person.sayHi(person)
+```
+
+![image](https://cdn.hashnode.com/res/hashnode/image/upload/v1649933556176/4sPww88G4.png)
+![image](https://cdn.hashnode.com/res/hashnode/image/upload/v1649933558162/hyRzZjd5s.png)
+![image](https://cdn.hashnode.com/res/hashnode/image/upload/v1649933559921/Z5xEijaz6.png)
+对于 person.sayHi(),会自动把person传到函数里面作为this
+
+如果是这样写 person.sayHi.call(person) 就需要手动把 person 传到函数里面作为 this
+
+```js
+let person = {
+    name: 'bot',
+    sayHi() {
+        console.log(this.name)
+    }
+}
+
+person.sayHi().call({name: 1})
+//output : 1
+```
+
+JS 发明了 call,第一个参数传的什么，this就是什么。
+
+把一个函数放在对象上面，那么这个函数和对象没有任何关系。
+
+使用 call 可以让我们更加清晰这个函数的 this 是啥。
+
+所以下面这个代码就可以这样调用：
+
+```js
+function add(x, y) {
+    return x + y
+}
+
+add.call(undefined, 1, 2)
+// output 3
+```
+
+这里一定要传 undefined 如果不传这个1就变成this了啊！！！
+![image](https://cdn.hashnode.com/res/hashnode/image/upload/v1649933561820/9FVwKyoIA.png)
+![image](https://cdn.hashnode.com/res/hashnode/image/upload/v1649933563516/eUltJnJJs.png)
