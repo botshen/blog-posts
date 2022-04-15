@@ -1,0 +1,10 @@
+## HTTP缓存有哪些方案
+
+## 缓存方案
+
+|  | 缓存（强缓存） | 内容协商（弱缓存） |
+| :-----| :----- | :----- |
+| HTTP 1.1 | Cache-Control:max-age=3600 <br> Etag:ABC| if-None-Match:ABC<br>响应状态码：304或200 |
+| HTTP 1.0 | Expires:Wed,21 Oct 2015 02:30:00 GMT<br>Last-Modified:Wed,21 Oct 2015 01:00:00 GMT |if-Modified-Since:Wed,21 Oct 2015 02:30:00<br>响应状态码：304或200 |
+
+`Pragma`MDN已经明确不推荐使用它
