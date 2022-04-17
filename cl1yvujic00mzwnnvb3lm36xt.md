@@ -1,4 +1,4 @@
-## GET和POST的区别是什么
+## Get和post的区别是什么
 
 ## 区别一：幂等性
 1. 由于GET是读，POST是写，所以GET是幂等的，POST是不幂等的。
