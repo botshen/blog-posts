@@ -167,4 +167,14 @@ function App() {
 export default observer(App)
 
 ```
+# Mobx 和 React 的职责划分
+## Mobx
+- 业务状态数据
+- 业务状态操作逻辑
+
+
+## React
+- 渲染业务数据
+- UI 临时状态维护
+- 事件触发，调用 Mobx
 
