@@ -121,7 +121,7 @@ export { useStore };
 ```
 
 List.store中导出实例
-```JSON
+```JavaScript
 import { computed, makeAutoObservable } from "mobx";
 
 class ListStore {
@@ -146,7 +146,7 @@ export default listStore;
 
 全局使用
 counterStore可以解构到某个store这一层
-```Plain Text
+```JavaScript
 import './App.css'
 
 import { observer } from 'mobx-react-lite'
