@@ -1,7 +1,5 @@
 ## TypeScript
 
-
-![Untitled 3.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650261793885/Qy4zpb-Pe.png)
 # Type声明基本类型
 
 ### 声明字符串类型
