@@ -62,7 +62,6 @@ const d:Dir = '难'// error!
 ### 两个对象的或操作
 
 ```typescript
-![Untitled.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1650261636943/QSn-zuaJg.png)
 type A = {
     t:'a'
     specialForA:string
