@@ -9,8 +9,7 @@ ul.addEventListener('click', function (e) {
     }
 })
 ```
- 
- 
+
 ## 高级事件委托
 
 有这样一个场景，ul里面有li，li里面有span。此时我点击span，上面的代码是不是执行li的事件的。
