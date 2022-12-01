@@ -1,12 +1,12 @@
-## 手写函数节流和防抖
+# Handwriting function throttling and debounced
 
-## 函数节流
+## Function throttling
 
-有这样一个需求，游戏的技能需要CD为3秒，三秒钟只之内不能再次释放
+Function throttling There is a requirement that the game's skills need to be CD'd for 3 seconds and cannot be released again within three seconds.
 
-首先写一个函数
+First, write a function
 
-我们需要记录是否处于cd时间，当我要释放技能的时候看一下是否处于CD，如果不处于CD中，就把CD置为true然后释放技能
+We need to record the CD time, when I want to release the skill to see whether it is in the CD, if not in the CD, then set the CD to true and then release the skill
 
 ```js
 function fn() {
